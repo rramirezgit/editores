@@ -1,7 +1,5 @@
 import { Archive } from 'iconsax-react'
 import ShareIcon from '@mui/icons-material/Share'
-import { icons } from '@/components/commingSoon/socialMediaIcons/icons'
-import Image from 'next/image'
 import stringStyle from './stringStyles'
 import styles from './news.module.css'
 

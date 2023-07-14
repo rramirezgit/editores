@@ -62,7 +62,10 @@ const DropZone = ({ label, ...props }: DropZoneProps) => {
     isDragAccept,
     isDragReject,
     isDragActive
-  } = useDropzone({ accept: { 'image/*': [] }, onDrop: handleDrop })
+  } = useDropzone({
+    accept: { 'image/jpeg': [], 'image/png': [] },
+    onDrop: handleDrop
+  })
 
   const style: any = useMemo(
     () => ({
