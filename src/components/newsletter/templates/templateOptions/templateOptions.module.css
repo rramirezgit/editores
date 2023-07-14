@@ -1,0 +1,25 @@
+.content {
+  display: flex;
+  gap: 10px;
+  height: max-content;
+}
+
+.options {
+  width: 63px;
+  display: flex;
+  gap: 3px;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+}
+
+.overlay > div {
+  opacity: 0.5;
+}
+
+.nooverlay > div {
+  opacity: 1;
+}

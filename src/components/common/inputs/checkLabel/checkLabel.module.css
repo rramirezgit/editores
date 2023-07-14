@@ -1,0 +1,6 @@
+.rememberMe {
+  display: flex;
+  align-items: center;
+  color: var(--gray_text);
+  font-size: 14px;
+}

@@ -1,0 +1,15 @@
+.error {
+  font-size: 14px;
+  color: var(--error);
+  position: absolute;
+  left: 35px;
+  bottom: -16px;
+}
+
+.container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  color: var(--gray_text);
+  font-size: 14px;
+}

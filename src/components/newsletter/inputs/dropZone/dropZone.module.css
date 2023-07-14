@@ -1,0 +1,38 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infotext {
+  font-size: 10.2375px;
+  line-height: 12px;
+  color: #000000;
+}
+
+.infotype {
+  font-size: 9.45px;
+  line-height: 11px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.button {
+  width: 75.2px;
+  height: 27.9px;
+  font-size: 7.875px;
+  line-height: 9px;
+}
+
+.label {
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: -0.02em;
+  color: #2f363e;
+  margin-bottom: 10px;
+}

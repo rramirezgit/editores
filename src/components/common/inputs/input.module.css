@@ -1,0 +1,7 @@
+.error {
+  font-size: 14px;
+  color: var(--error);
+  position: absolute;
+  left: 0px;
+  bottom: -20px;
+}
