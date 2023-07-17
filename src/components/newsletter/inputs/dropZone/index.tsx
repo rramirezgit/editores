@@ -6,6 +6,7 @@ import styles from './dropZone.module.css'
 import { Button } from '@mui/material'
 import { useField } from 'formik'
 import { useEffect, useState } from 'react'
+import { s3Client } from '@/pages/_app'
 
 const baseStyle = {
   flex: 1,
@@ -50,7 +51,20 @@ const DropZone = ({ label, ...props }: DropZoneProps) => {
     const file: any = acceptedFiles[0]
     const reader = new FileReader()
     reader.onload = async e => {
-      setSelectedImage({ path: file.path, data: e.target?.result })
+      s3Client.upload(
+        {
+          Bucket: 'adac-development',
+          Key: file.path,
+          Body: file
+        },
+        (err: any, data: any) => {
+          if (err) {
+            console.log(err)
+          }
+          console.log(data)
+          setSelectedImage({ path: file.path, data: data.Location })
+        }
+      )
     }
     reader.readAsDataURL(file)
   }

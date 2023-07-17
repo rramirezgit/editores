@@ -4,7 +4,7 @@ const initialValues = (values: any) => {
     color: values?.color || '#F9BB19',
     haveSponsored: values?.haveSponsored || true,
     imgHeader: values?.imgHeader || {
-      data: 'https://storage.mlcdn.com/account_image/421950/gdYZxKgNWogvwZ9aZ2Qmjg5WeLeIkOB3aZhSMZta.png',
+      data: 'https://adac-development.s3.us-west-2.amazonaws.com/nasa.png',
       path: 'logo_ADAC_Horizontal.svg'
     },
     imgSponsored: values?.imgSponsored || {
