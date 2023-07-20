@@ -10,6 +10,17 @@ import { setShowSelectTemplate } from '@/store/slices/newsletter'
 import NewsTemplate from '@/components/newsletter/templates/news'
 import NewsletterForms from '@/components/newsletter/newsletterForms'
 import FinishButton from '@/components/newsletter/inputs/finishButton'
+import AWS from 'aws-sdk'
+
+// Configurar las credenciales de AWS
+AWS.config.update({
+  accessKeyId: 'AKIAQJ2WKKF33WY36DXY',
+  secretAccessKey: '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',
+  region: 'us-west-2'
+})
+
+// Crear una instancia del cliente de AWS S3
+export const s3Client = new AWS.S3()
 
 const Newsletter = () => {
   const dispatch = useDispatch()

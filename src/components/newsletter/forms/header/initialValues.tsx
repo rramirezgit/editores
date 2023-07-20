@@ -4,11 +4,11 @@ const initialValues = (values: any) => {
     color: values?.color || '#F9BB19',
     haveSponsored: values?.haveSponsored || true,
     imgHeader: values?.imgHeader || {
-      data: 'https://adac-development.s3.us-west-2.amazonaws.com/nasa.png',
+      data: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/unnamed%20%282%29.png',
       path: 'logo_ADAC_Horizontal.svg'
     },
     imgSponsored: values?.imgSponsored || {
-      data: 'https://storage.mlcdn.com/account_image/421950/xXboKiEuvfD6VxLTby08V8nghsrxY58h00YLZi3w.png',
+      data: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/spon.png',
       path: 'SimpliSafe_logo.svg'
     },
     id: 0

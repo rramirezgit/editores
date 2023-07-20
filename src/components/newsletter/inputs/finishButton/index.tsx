@@ -1,17 +1,46 @@
 import { SpeedDial, SpeedDialAction } from '@mui/material'
-import SaveIcon from '@mui/icons-material/Save'
-import ShareIcon from '@mui/icons-material/Share'
-import { Html5, Setting } from 'iconsax-react'
+import { Eye, Lock, Send2, Setting, DirectSend } from 'iconsax-react'
 import { useRouter } from 'next/router'
-
-const actions = [
-  { icon: <SaveIcon />, name: 'Guardar' },
-  { icon: <Html5 />, name: 'Descargar html' },
-  { icon: <ShareIcon />, name: 'Compartir' }
-]
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { id } from 'date-fns/locale'
 
 const FinishButton = () => {
   const router = useRouter()
+  const { user } = useUser()
+
+  const generateUniqueId = () => {
+    const timestamp = new Date().getTime()
+    const random = Math.random().toString(36).substring(2)
+    return `${timestamp}-${random}`
+  }
+
+  const handleClickPreview = () => {
+    router.push('/newsletter/previewHtml')
+  }
+
+  const handleClickTest = () => {
+    if (!user) router.push('/api/auth/login')
+    alert(user?.email)
+  }
+
+  const handleClickSave = () => {
+    const data = {
+      name: user?.name,
+      email: user?.email,
+      template: 'template',
+      date: new Date(),
+      id: generateUniqueId()
+    }
+    alert(JSON.stringify(data))
+    // enviar el objeto en string a aws S3
+  }
+
+  const actions = [
+    { icon: <Send2 />, name: 'Enviar', onClick: handleClickPreview },
+    { icon: <Eye />, name: 'Previsualizar', onClick: handleClickPreview },
+    { icon: <Lock />, name: 'Probar', onClick: handleClickTest },
+    { icon: <DirectSend />, name: 'Guardar', onClick: handleClickSave }
+  ]
 
   return (
     <SpeedDial
@@ -32,12 +61,7 @@ const FinishButton = () => {
           key={action.name}
           icon={action.icon}
           tooltipTitle={action.name}
-          onClick={() => {
-            // if (action.name === 'Descargar html') {
-            //   window.open('/newsletter/previewHtml', '_blank')
-            // }
-            router.push('/newsletter/previewHtml')
-          }}
+          onClick={action.onClick}
         />
       ))}
     </SpeedDial>

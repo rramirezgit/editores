@@ -1,31 +1,22 @@
 import HeaderTemplate from '@/components/newsletter/templates/header'
 import NewsTemplate from '@/components/newsletter/templates/news'
+import { useEffect } from 'react'
+import handleDownload from './dowloadHtml'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import stringStyle from './stringStyles'
-import { IconButton } from '@mui/material'
-import { Back } from 'iconsax-react'
-import { useRouter } from 'next/router'
 
 const PreviewHtml = () => {
   const { templates } = useSelector((state: RootState) => state.newsletter)
-  const router = useRouter()
+
+  // useEffect(() => {
+  //   // const styles = document.querySelectorAll('head style')
+  //   // styles.forEach(style => style.remove())
+  //   // handleDownload()
+  // }, [])
 
   return (
     <div style={stringStyle.preview_content} id="previwHtml">
-      <div
-        style={{
-          position: 'fixed'
-        }}
-      >
-        <IconButton
-          onClick={() => {
-            router.push('/newsletter')
-          }}
-        >
-          <Back size="32" />
-        </IconButton>
-      </div>
       <table
         width="100%"
         style={{

@@ -6,15 +6,6 @@ const nextConfig = {
       'storage.mlcdn.com',
       'https://adac-development.s3.us-west-2.amazonaws.com/'
     ]
-  },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/newsletter',
-        permanent: true
-      }
-    ]
   }
 }
 

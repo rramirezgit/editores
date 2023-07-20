@@ -78,9 +78,11 @@ const HeaderTemplate = ({
             >
               Juntos con:
             </div>
-            <div>
-              <img src={sponsor.data} alt="logo" width={230} height={72} />
-            </div>
+            {sponsor && (
+              <div>
+                <img src={sponsor?.data} alt="logo" width={230} height={72} />
+              </div>
+            )}
           </>
         )}
         {Texto && Texto !== '<p><br></p>' && (
