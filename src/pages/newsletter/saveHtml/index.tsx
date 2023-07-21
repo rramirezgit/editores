@@ -1,17 +1,27 @@
 import HeaderTemplate from '@/components/newsletter/templates/header'
 import NewsTemplate from '@/components/newsletter/templates/news'
+import { useEffect } from 'react'
+import sendDataNewsletter from './sendDataNewsletter'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import stringStyle from './stringStyles'
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { useRouter } from 'next/router'
 
 const PreviewHtml = () => {
   const { templates } = useSelector((state: RootState) => state.newsletter)
+  const { user } = useUser()
+  const rediret = useRouter()
 
-  // useEffect(() => {
-  //   // const styles = document.querySelectorAll('head style')
-  //   // styles.forEach(style => style.remove())
-  //   // handleDownload()
-  // }, [])
+  useEffect(() => {
+    // const styles = document.querySelectorAll('head style')
+    // styles.forEach(style => style.remove())
+    if (user) {
+      sendDataNewsletter(user)
+    } else {
+      rediret.push('/api/auth/login')
+    }
+  }, [])
 
   return (
     <div style={stringStyle.preview_content} id="previwHtml">

@@ -96,25 +96,6 @@ const NewsTemplate = ({
             }}
             dangerouslySetInnerHTML={{ __html: text }}
           ></div>
-          {/* <div style={stringStyle.news_template_social}>
-            {icons.map((item, index) => (
-              <div
-                aria-label="social-media"
-                key={index}
-                style={stringStyle.news_template_icon}
-                onClick={() => {
-                  window.open(item.href, '_blank')
-                }}
-              >
-               <img
-                  alt="social-media"
-                  height={24}
-                  src={item.src}
-                  width={24}
-                />
-              </div>
-            ))}
-          </div> */}
         </div>
       </div>
     </>
