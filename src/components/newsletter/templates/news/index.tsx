@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Archive } from 'iconsax-react'
 import ShareIcon from '@mui/icons-material/Share'
 import stringStyle from './stringStyles'
