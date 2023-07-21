@@ -54,6 +54,7 @@ const DropZone = ({ label, ...props }: DropZoneProps) => {
       s3Client.upload(
         {
           Bucket: 'adac-development/Media',
+          ContentType: file.type,
           Key: file.path,
           Body: file
         },

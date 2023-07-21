@@ -13,7 +13,7 @@ const stringStyle: { [key: string]: CSSProperties } = {
     isolation: 'isolate',
     height: 'max-content',
     background: '#ffffff',
-    borderRadius: '12.8819px',
+    borderRadius: '0 0 12.8819px 12.8819px',
     padding: '27px',
     width: '100%',
     boxSizing: 'border-box'

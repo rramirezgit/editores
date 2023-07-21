@@ -2,17 +2,10 @@ import { SpeedDial, SpeedDialAction } from '@mui/material'
 import { Eye, Lock, Send2, Setting, DirectSend } from 'iconsax-react'
 import { useRouter } from 'next/router'
 import { useUser } from '@auth0/nextjs-auth0/client'
-import { id } from 'date-fns/locale'
 
 const FinishButton = () => {
   const router = useRouter()
   const { user } = useUser()
-
-  const generateUniqueId = () => {
-    const timestamp = new Date().getTime()
-    const random = Math.random().toString(36).substring(2)
-    return `${timestamp}-${random}`
-  }
 
   const handleClickPreview = () => {
     router.push('/newsletter/previewHtml')
@@ -24,15 +17,7 @@ const FinishButton = () => {
   }
 
   const handleClickSave = () => {
-    const data = {
-      name: user?.name,
-      email: user?.email,
-      template: 'template',
-      date: new Date(),
-      id: generateUniqueId()
-    }
-    alert(JSON.stringify(data))
-    // enviar el objeto en string a aws S3
+    router.push('/newsletter/saveHtml')
   }
 
   const actions = [
