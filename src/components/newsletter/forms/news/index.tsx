@@ -24,10 +24,10 @@ const NewsForm = ({ id }: NewsFormProps) => {
       }}
       validationSchema={validationSchemaForm}
     >
-      {({ values, submitForm }) => {
+      {({ values }) => {
         return (
           <>
-            <NewsOptions values={values} id={id} submitForm={submitForm} />
+            <NewsOptions values={values} id={id} />
           </>
         )
       }}

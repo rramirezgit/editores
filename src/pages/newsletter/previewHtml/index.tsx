@@ -2,7 +2,6 @@ import HeaderTemplate from '@/components/newsletter/templates/header'
 import NewsTemplate from '@/components/newsletter/templates/news'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import stringStyle from './stringStyles'
 import { IconButton } from '@mui/material'
 import { Back } from 'iconsax-react'
 import { useRouter } from 'next/router'
@@ -12,7 +11,17 @@ const PreviewHtml = () => {
   const router = useRouter()
 
   return (
-    <div style={stringStyle.preview_content} id="previwHtml">
+    <div
+      style={{
+        width: '100%',
+        height: 'max-content',
+        backgroundColor: '#f6f7fb',
+        alignItems: 'center',
+        gap: '1rem',
+        padding: '20px 0'
+      }}
+      id="previwHtml"
+    >
       <div
         style={{
           position: 'fixed'

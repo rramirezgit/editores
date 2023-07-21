@@ -11,10 +11,9 @@ import { setNewsValuesByid } from '@/store/slices/newsletter'
 interface NewsOptionsProps {
   values: any
   id: string
-  submitForm: () => void
 }
 
-const NewsOptions = ({ values, id, submitForm }: NewsOptionsProps) => {
+const NewsOptions = ({ values, id }: NewsOptionsProps) => {
   const dispatch = useDispatch()
 
   useEffect(() => {

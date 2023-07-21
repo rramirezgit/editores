@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import sendDataNewsletter from './sendDataNewsletter'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
-import stringStyle from './stringStyles'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import { useRouter } from 'next/router'
 
@@ -24,7 +23,17 @@ const PreviewHtml = () => {
   }, [])
 
   return (
-    <div style={stringStyle.preview_content} id="previwHtml">
+    <div
+      style={{
+        width: '100%',
+        height: 'max-content',
+        backgroundColor: '#f6f7fb',
+        alignItems: 'center',
+        gap: '1rem',
+        padding: '20px 0'
+      }}
+      id="previwHtml"
+    >
       <table
         width="100%"
         style={{
