@@ -32,7 +32,6 @@ const NewsOptions = ({ values, id, submitForm }: NewsOptionsProps) => {
 
   return (
     <BasicTabs
-      submitForm={submitForm}
       tabs={[
         {
           index: 0,

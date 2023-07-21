@@ -2,7 +2,6 @@ import { SpeedDial, SpeedDialAction } from '@mui/material'
 import { Eye, Lock, Send2, Setting, DirectSend } from 'iconsax-react'
 import { useRouter } from 'next/router'
 import { useUser } from '@auth0/nextjs-auth0/client'
-import { id } from 'date-fns/locale'
 
 const FinishButton = () => {
   const router = useRouter()

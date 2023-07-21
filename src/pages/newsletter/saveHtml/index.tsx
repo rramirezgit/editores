@@ -1,7 +1,5 @@
 import HeaderTemplate from '@/components/newsletter/templates/header'
 import NewsTemplate from '@/components/newsletter/templates/news'
-import { useEffect } from 'react'
-import handleDownload from './dowloadHtml'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import stringStyle from './stringStyles'

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import stringStyle from '@/components/newsletter/templates/header/stringStyles'
 
 interface props {
@@ -78,7 +79,7 @@ const HeaderTemplate = ({
             >
               Juntos con:
             </div>
-            {sponsor && (
+            {sponsor && sponsor.data !== '' && (
               <div>
                 <img src={sponsor?.data} alt="logo" width={230} height={72} />
               </div>

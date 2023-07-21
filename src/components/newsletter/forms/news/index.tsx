@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import React, { useEffect } from 'react'
+import React from 'react'
 import initialValues from './initialValues'
 import validationSchema from './validationSchema'
 import NewsOptions from './newsOptions'
@@ -11,8 +11,6 @@ interface NewsFormProps {
 }
 
 const NewsForm = ({ id }: NewsFormProps) => {
-  const [valuesState, setValues] = React.useState({} as any)
-
   const {
     templates: { news }
   } = useSelector((state: RootState) => state.newsletter)
@@ -27,7 +25,6 @@ const NewsForm = ({ id }: NewsFormProps) => {
       validationSchema={validationSchemaForm}
     >
       {({ values, submitForm }) => {
-        // console.log({ values })
         return (
           <>
             <NewsOptions values={values} id={id} submitForm={submitForm} />

@@ -50,7 +50,7 @@ const DropZone = ({ label, ...props }: DropZoneProps) => {
   const handleDrop = (acceptedFiles: any[]) => {
     const file: any = acceptedFiles[0]
     const reader = new FileReader()
-    reader.onload = async e => {
+    reader.onload = async () => {
       s3Client.upload(
         {
           Bucket: 'adac-development/Media',

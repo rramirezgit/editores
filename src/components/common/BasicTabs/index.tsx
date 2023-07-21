@@ -60,10 +60,9 @@ type tabs = {
 interface BasicTabsProps {
   tabPanels: tabPanels[]
   tabs: tabs[]
-  submitForm?: () => void
 }
 
-const BasicTabs = ({ tabPanels, tabs, submitForm }: BasicTabsProps) => {
+const BasicTabs = ({ tabPanels, tabs }: BasicTabsProps) => {
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

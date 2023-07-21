@@ -18,7 +18,7 @@ interface Props {
   name: string
 }
 
-const ColorPicker = ({ label, name, ...props }: Props) => {
+const ColorPicker = ({ label, name }: Props) => {
   const [field] = useField(name)
   return (
     <>
