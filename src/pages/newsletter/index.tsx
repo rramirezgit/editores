@@ -12,6 +12,10 @@ import NewsletterForms from '@/components/newsletter/newsletterForms'
 import FinishButton from '@/components/newsletter/inputs/finishButton'
 import AWS from 'aws-sdk'
 
+const accessKeyId = process.env.AWS_CLIENT_ACCESS_KEY_ID as string
+const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY as string
+const region = process.env.AWS_REGION as string
+
 // Configurar las credenciales de AWS
 AWS.config.update({
   accessKeyId: 'AKIAQJ2WKKF33WY36DXY',
@@ -19,7 +23,6 @@ AWS.config.update({
   region: 'us-west-2'
 })
 
-// Crear una instancia del cliente de AWS S3
 export const s3Client = new AWS.S3()
 
 const Newsletter = () => {
@@ -45,20 +48,6 @@ const Newsletter = () => {
         ) : (
           <NewsletterForms id={templateIdEditing} />
         )}
-
-        {/* <Fab
-          variant="extended"
-          size="small"
-          style={{
-            backgroundColor: colors.primary_yellow,
-            position: 'absolute',
-            bottom: '20px',
-            left: '25px'
-          }}
-          aria-label="add"
-        >
-          <CardEdit size="20" variant="Outline" />
-        </Fab> */}
       </div>
       <div className={styles.preview}>
         <TemplatesOptions from="header" id={'0'}>

@@ -1,5 +1,4 @@
 import { UserProfile } from '@auth0/nextjs-auth0/client'
-import { s3Client } from '@/pages/newsletter'
 
 const generateUniqueId = () => {
   const timestamp = new Date().getTime()
@@ -7,7 +6,7 @@ const generateUniqueId = () => {
   return `${timestamp}-${random}`
 }
 
-const sendDataNewsletter = (user: UserProfile | undefined) => {
+const getHtml = (user: UserProfile | undefined) => {
   let htmlContent = generateHTML()
 
   /// recorrer htmlContent y solo guardar la eqtiqueta <body> y su contenido
@@ -18,28 +17,29 @@ const sendDataNewsletter = (user: UserProfile | undefined) => {
   })
 
   if (!user) return
-  const data = {
-    name: user?.name,
-    email: user?.email,
-    template: htmlContent,
-    date: new Date(),
-    id: generateUniqueId()
-  }
+  // const data = {
+  //   name: user?.name,
+  //   email: user?.email,
+  //   template: htmlContent,
+  //   date: new Date(),
+  //   id: generateUniqueId()
+  // }
 
-  s3Client.upload(
-    {
-      Bucket: 'adac-development/Newsletter',
-      ContentType: 'application/json',
-      Key: data.id,
-      Body: JSON.stringify(data)
-    },
-    (err: any, data: any) => {
-      if (err) {
-        console.log(err)
-      }
-      console.log(data)
-    }
-  )
+  // s3Client.upload(
+  //   {
+  //     Bucket: 'adac-development/Newsletter',
+  //     ContentType: 'application/json',
+  //     Key: data.id,
+  //     Body: JSON.stringify(data)
+  //   },
+  //   (err: any, data: any) => {
+  //     if (err) {
+  //       console.log(err)
+  //     }
+  //     console.log(data)
+  //   }
+  // )
+  return htmlContent
 }
 
 const generateHTML = () => {
@@ -54,4 +54,4 @@ const generateHTML = () => {
   return htmlContent
 }
 
-export default sendDataNewsletter
+export default getHtml
