@@ -43,7 +43,8 @@ const TagSelect = ({ name }: Props) => {
       getOptionLabel={option => option.label}
       renderTags={(tagValue, getTagProps) =>
         tagValue.map((option: any, index: number) => (
-          <Chip key={index} label={option.label} {...getTagProps({ index })} />
+          // eslint-disable-next-line react/jsx-key
+          <Chip label={option.label} {...getTagProps({ index })} />
         ))
       }
       style={{ width: 500 }}

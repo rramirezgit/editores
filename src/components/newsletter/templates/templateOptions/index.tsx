@@ -122,7 +122,7 @@ const TemplatesOptions = ({
               </Tooltip>
             </div>
             <div>
-              <Tooltip title="subir" placement="left">
+              <Tooltip title="Subir" placement="left">
                 <IconButton
                   size="small"
                   id={id}
@@ -133,7 +133,7 @@ const TemplatesOptions = ({
               </Tooltip>
             </div>
             <div>
-              <Tooltip title="bajar" placement="left">
+              <Tooltip title="Bajar" placement="left">
                 <IconButton
                   size="small"
                   id={id}

@@ -32,7 +32,7 @@ const initialState: newsletterState = {
       color: '',
       textHeader: '',
       imgHeader: {
-        data: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/unnamed%20%282%29.png',
+        data: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/logoAdac.png',
         path: 'logo_ADAC_Horizontal.svg'
       },
       imgSponsored: {

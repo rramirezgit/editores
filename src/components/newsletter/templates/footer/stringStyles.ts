@@ -8,7 +8,8 @@ const stringStyle: { [key: string]: CSSProperties } = {
     height: '298px',
     padding: '33px',
     textAlign: 'center',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    cursor: 'pointer'
   },
   footer_content_title: {
     color: '#000',
