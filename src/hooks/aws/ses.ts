@@ -23,7 +23,6 @@ const useAWSSes = (
   const [sesClient, setSesClient] = useState<SESv2Client | null>(null)
 
   useEffect(() => {
-    debugger
     if (!accessKeyId || !secretAccessKey || !region) return
     setupSesClient({ accessKeyId, secretAccessKey }, region)
   }, [accessKeyId, secretAccessKey, region])

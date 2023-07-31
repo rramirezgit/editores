@@ -11,7 +11,6 @@ interface NewsTemplateProps {
     data: string
   }
   title: string
-  readingTime: string
   tags?: string[]
   text: string
   color: string
@@ -21,11 +20,24 @@ const NewsTemplate = ({
   textHeader,
   img,
   title,
-  readingTime,
   tags = [],
   text,
   color
 }: NewsTemplateProps) => {
+  interface ReadingTimeProps {
+    text: string
+    wordsPerMinute: number
+  }
+  const calculateReadingTime = ({ text, wordsPerMinute }: ReadingTimeProps) => {
+    const words = text.split(/\s+/).filter(word => word !== '')
+
+    const wordCount = words.length
+
+    const readingTimeMinutes = wordCount / wordsPerMinute
+
+    return readingTimeMinutes
+  }
+
   return (
     <>
       <div
@@ -71,12 +83,18 @@ const NewsTemplate = ({
                     month: 'long',
                     day: 'numeric'
                   })}
+                  {' - ' +
+                    calculateReadingTime({ text, wordsPerMinute: 250 }).toFixed(
+                      2
+                    ) +
+                    ' min lectura'}
                 </div>
-                <div>{readingTime}</div>
               </div>
               <div style={stringStyle.news_template_tags}>
-                {tags.map((item, index) => (
-                  <div key={index} style={stringStyle.news_template_tag}></div>
+                {tags.map((item: any, index) => (
+                  <div key={index} style={stringStyle.news_template_tag}>
+                    {item.label}
+                  </div>
                 ))}
               </div>
             </div>

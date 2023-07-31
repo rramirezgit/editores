@@ -13,7 +13,7 @@ const FinishButton = () => {
 
   const handleClickTest = () => {
     if (!user) router.push('/api/auth/login')
-    // alert(user?.email)
+    alert(user?.email)
   }
 
   const handleClickSave = () => {

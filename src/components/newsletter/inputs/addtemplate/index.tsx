@@ -9,11 +9,7 @@ interface AddtemplateProps {
 
 const Addtemplate = ({ onClick }: AddtemplateProps) => {
   return (
-    <Tooltip
-      title="Agregar template"
-      placement="bottom"
-      sx={{ m: '0 0 40px', left: -30 }}
-    >
+    <Tooltip title="Agregar template" placement="bottom" sx={{ left: -30 }}>
       <IconButton onClick={onClick}>
         <AddCircle size="50" color={colors.gray} variant="Bulk" />
       </IconButton>

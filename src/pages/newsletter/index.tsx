@@ -11,16 +11,17 @@ import NewsTemplate from '@/components/newsletter/templates/news'
 import NewsletterForms from '@/components/newsletter/newsletterForms'
 import FinishButton from '@/components/newsletter/inputs/finishButton'
 import AWS from 'aws-sdk'
+import Footer from '@/components/newsletter/templates/footer'
 
-const accessKeyId = process.env.AWS_CLIENT_ACCESS_KEY_ID as string
-const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY as string
-const region = process.env.AWS_REGION as string
+const accessKeyId = process.env.NEXT_PUBLIC_AWS_CLIENT_ACCESS_KEY_ID as string
+const secretAccessKey = process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY as string
+const region = process.env.NEXT_PUBLIC_AWS_REGION as string
 
 // Configurar las credenciales de AWS
 AWS.config.update({
-  accessKeyId: 'AKIAQJ2WKKF33WY36DXY',
-  secretAccessKey: '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',
-  region: 'us-west-2'
+  accessKeyId,
+  secretAccessKey,
+  region
 })
 
 export const s3Client = new AWS.S3()
@@ -66,7 +67,6 @@ const Newsletter = () => {
                 textHeader={item.textHeader}
                 img={item.img}
                 title={item.title}
-                readingTime={item.readingTime}
                 tags={item.tags}
                 text={item.text}
                 color={item.color}
@@ -76,6 +76,9 @@ const Newsletter = () => {
         })}
         <Addtemplate onClick={hanldleClickAddTemplate} />
         <FinishButton />
+        <div style={{ marginLeft: '-69px' }}>
+          <Footer />
+        </div>
       </div>
     </div>
   )

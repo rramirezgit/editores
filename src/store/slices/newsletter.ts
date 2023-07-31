@@ -100,6 +100,23 @@ export const newsletter = createSlice({
         n => n.id !== action.payload
       )
       state.templateIdEditing = '0'
+    },
+    setOrdererNews: (state, action) => {
+      /* recibe el id y una direccion up o down lo que hace, si es up el id se mueve un indice antes en el array y si es dows un indice despues en el array */
+      const index = state.templates.news.findIndex(
+        n => n.id === action.payload.id
+      )
+      const news = state.templates.news[index]
+      if (action.payload.direction === 'up') {
+        if (index === 0) return
+        state.templates.news[index] = state.templates.news[index - 1]
+        state.templates.news[index - 1] = news
+      }
+      if (action.payload.direction === 'down') {
+        if (index === state.templates.news.length - 1) return
+        state.templates.news[index] = state.templates.news[index + 1]
+        state.templates.news[index + 1] = news
+      }
     }
   }
 })
@@ -109,6 +126,7 @@ export const {
   setShowSelectTemplate,
   addNews,
   setTemplateIdEditing,
+  setOrdererNews,
   setNewsValuesByid,
   deleteNewsById
 } = newsletter.actions

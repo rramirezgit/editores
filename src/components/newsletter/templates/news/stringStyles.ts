@@ -1,3 +1,4 @@
+import { TextalignCenter } from 'iconsax-react'
 import { CSSProperties } from 'react'
 
 const stringStyle: { [key: string]: CSSProperties } = {
@@ -55,8 +56,7 @@ const stringStyle: { [key: string]: CSSProperties } = {
     alignItems: 'center'
   },
   news_template_info: {
-    display: 'flex',
-    gap: '15px'
+    display: 'flex'
   },
   news_template_infodate: {
     display: 'flex',
@@ -66,13 +66,23 @@ const stringStyle: { [key: string]: CSSProperties } = {
     color: '#b9b9b9'
   },
   news_template_tags: {
-    display: 'flex'
+    display: 'flex',
+    color: '#29394E',
+    fontSize: '7.976px',
+    fontStyle: 'normal',
+    fontWeight: '325',
+    lineHeight: 'normal',
+    textAlign: 'center',
+    margin: '0px 5px'
   },
   news_template_tag: {
     width: '35.81px',
     height: '12.8px',
     borderRadius: '4px',
-    background: 'rgba(36, 143, 153, 0.41)'
+    background: 'rgba(36, 143, 153, 0.41)',
+    margin: '0px 5px 0px 0px',
+    padding: '1.5px',
+    boxSizing: 'border-box'
   },
   news_template_btns: {
     display: 'flex',

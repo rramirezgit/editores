@@ -5,6 +5,7 @@ import { RootState } from '@/store'
 import { IconButton } from '@mui/material'
 import { Back } from 'iconsax-react'
 import { useRouter } from 'next/router'
+import Footer from '@/components/newsletter/templates/footer'
 
 const PreviewHtml = () => {
   const { templates } = useSelector((state: RootState) => state.newsletter)
@@ -65,9 +66,14 @@ const PreviewHtml = () => {
                 title={news.title}
                 textHeader={news.textHeader}
                 text={news.text}
-                readingTime={news.readingTime}
+                tags={news.tags}
               />
             ))}
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <Footer />
           </td>
         </tr>
       </table>
