@@ -1,0 +1,16 @@
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.escala {
+  margin-top: 10px;
+}
+
+.colorPicket {
+  margin: 10px 0px;
+}

@@ -6,6 +6,7 @@ interface Values {
   text: string
   readingTime: string
   tags: string[]
+  bagroundColor?: string
 }
 
 const initialValues = (values: Values) => {
@@ -16,7 +17,8 @@ const initialValues = (values: Values) => {
     title: values?.title || 'titulo de la noticia',
     text: values?.text || 'loren ipsum',
     readingTime: values?.readingTime || '',
-    tags: values?.tags || []
+    tags: values?.tags || [],
+    bagroundColor: values?.bagroundColor || '#a7a7a7bd'
   }
 }
 

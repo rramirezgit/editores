@@ -24,6 +24,7 @@ export interface newsletterState {
 
   showSelectTemplate: boolean
   templateIdEditing: string
+  previewCanvasRef?: any
 }
 
 const initialState: newsletterState = {
@@ -75,7 +76,8 @@ export const newsletter = createSlice({
         title: '',
         text: 'loren ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt',
         readingTime: '',
-        tags: []
+        tags: [],
+        bagroundColor: '#a7a7a7bd'
       }
       state.templates.news.push(newNews)
       state.templateIdEditing = action.payload.id
@@ -93,6 +95,7 @@ export const newsletter = createSlice({
         news.text = action.payload.text
         news.readingTime = action.payload.readingTime
         news.tags = action.payload.tags
+        news.bagroundColor = action.payload.bagroundColor
       }
     },
     deleteNewsById: (state, action) => {
@@ -117,6 +120,9 @@ export const newsletter = createSlice({
         state.templates.news[index] = state.templates.news[index + 1]
         state.templates.news[index + 1] = news
       }
+    },
+    setPreviewCanvasRef: (state, action) => {
+      state.previewCanvasRef = action.payload
     }
   }
 })
@@ -128,7 +134,8 @@ export const {
   setTemplateIdEditing,
   setOrdererNews,
   setNewsValuesByid,
-  deleteNewsById
+  deleteNewsById,
+  setPreviewCanvasRef
 } = newsletter.actions
 
 export default newsletter.reducer

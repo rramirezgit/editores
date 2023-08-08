@@ -95,6 +95,7 @@ const SaveHTML = () => {
                 textHeader={news.textHeader}
                 text={news.text}
                 tags={news.tags}
+                bagroundColor={news.bagroundColor}
               />
             ))}
           </td>

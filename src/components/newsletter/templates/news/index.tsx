@@ -3,6 +3,9 @@ import { Archive } from 'iconsax-react'
 import ShareIcon from '@mui/icons-material/Share'
 import stringStyle from './stringStyles'
 import styles from './news.module.css'
+import { useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { setPreviewCanvasRef } from '@/store/slices/newsletter'
 
 interface NewsTemplateProps {
   textHeader: string
@@ -14,6 +17,7 @@ interface NewsTemplateProps {
   tags?: string[]
   text: string
   color: string
+  bagroundColor: string
 }
 
 const NewsTemplate = ({
@@ -22,8 +26,12 @@ const NewsTemplate = ({
   title,
   tags = [],
   text,
-  color
+  color,
+  bagroundColor
 }: NewsTemplateProps) => {
+  const previewCanvasRef = useRef<HTMLCanvasElement>(null)
+  const dispatch = useDispatch()
+
   interface ReadingTimeProps {
     text: string
     wordsPerMinute: number
@@ -38,6 +46,11 @@ const NewsTemplate = ({
     return readingTimeMinutes
   }
 
+  useEffect(() => {
+    if (previewCanvasRef.current) {
+      dispatch(setPreviewCanvasRef(previewCanvasRef))
+    }
+  }, [previewCanvasRef])
   return (
     <>
       <div
@@ -53,8 +66,13 @@ const NewsTemplate = ({
           className={styles.contentTitleHeader}
           dangerouslySetInnerHTML={{ __html: textHeader }}
         ></div>
-        <div style={stringStyle.news_template_img}>
-          <img
+        <div
+          style={{
+            ...stringStyle.news_template_img,
+            backgroundColor: bagroundColor
+          }}
+        >
+          {/* <img
             alt="img"
             height={241}
             src={img.data}
@@ -62,7 +80,17 @@ const NewsTemplate = ({
             style={{
               objectFit: 'cover'
             }}
-          />
+          /> */}
+          <div>
+            <canvas
+              ref={previewCanvasRef}
+              style={{
+                objectFit: 'contain',
+                width: '100%',
+                height: 241
+              }}
+            />
+          </div>
         </div>
         <div
           style={{

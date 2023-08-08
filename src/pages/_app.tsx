@@ -8,14 +8,14 @@ import ProtectedRoute from '@/components/common/ProtectedRoutes'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Theme>
-      <Provider store={store}>
-        <UserProvider>
+    <Provider store={store}>
+      <UserProvider>
+        <Theme>
           <ProtectedRoute>
             <Component {...pageProps} />
           </ProtectedRoute>
-        </UserProvider>
-      </Provider>
-    </Theme>
+        </Theme>
+      </UserProvider>
+    </Provider>
   )
 }

@@ -33,6 +33,7 @@ const TagSelect = ({ name }: Props) => {
   const [field, , helpers] = useField(name)
   return (
     <Autocomplete
+      color="warning"
       multiple
       id="fixed-tags-demo"
       value={field.value}
@@ -47,9 +48,9 @@ const TagSelect = ({ name }: Props) => {
           <Chip label={option.label} {...getTagProps({ index })} />
         ))
       }
-      style={{ width: 500 }}
+      style={{ width: '100%' }}
       renderInput={params => (
-        <TextField {...params} label="Tags" placeholder="Tag" />
+        <TextField {...params} label="Tags" color="warning" placeholder="Tag" />
       )}
     />
   )

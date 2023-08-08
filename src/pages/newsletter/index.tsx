@@ -70,6 +70,7 @@ const Newsletter = () => {
                 tags={item.tags}
                 text={item.text}
                 color={item.color}
+                bagroundColor={item.bagroundColor}
               />
             </TemplatesOptions>
           )

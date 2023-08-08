@@ -34,10 +34,7 @@ const stringStyle: { [key: string]: CSSProperties } = {
   news_template_img: {
     height: '241px',
     width: '100%',
-    background: '#a7a7a7bd',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    background: '#a7a7a7bd'
   },
   news_template_title: {
     fontStyle: 'normal',

@@ -6,7 +6,7 @@ import styles from './dropZone.module.css'
 import { Button } from '@mui/material'
 import { useField } from 'formik'
 import { useEffect, useState } from 'react'
-import { s3Client } from '@/pages/newsletter'
+import Crop from './Crop'
 
 const baseStyle = {
   flex: 1,
@@ -42,29 +42,19 @@ interface DropZoneProps {
 
 const DropZone = ({ label, ...props }: DropZoneProps) => {
   const [, , helpers] = useField(props)
+  const [showCrop, setShowCrop] = useState(false)
   const [selectedImage, setSelectedImage] = useState<any>({
-    path: '',
-    data: ''
+    file: '',
+    data: '',
+    path: ''
   })
 
   const handleDrop = (acceptedFiles: any[]) => {
     const file: any = acceptedFiles[0]
     const reader = new FileReader()
-    reader.onload = async () => {
-      s3Client.upload(
-        {
-          Bucket: 'adac-development/Media',
-          ContentType: file.type,
-          Key: file.path,
-          Body: file
-        },
-        (err: any, data: any) => {
-          if (err) {
-            console.log(err)
-          }
-          setSelectedImage({ path: file.path, data: data.Location })
-        }
-      )
+    reader.onload = async e => {
+      setSelectedImage({ file, data: e.target?.result })
+      setShowCrop(true)
     }
     reader.readAsDataURL(file)
   }
@@ -98,29 +88,40 @@ const DropZone = ({ label, ...props }: DropZoneProps) => {
   }, [selectedImage])
 
   return (
-    <div className="container">
-      <div className={styles.label}>{label}</div>
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        <div className={styles.content}>
-          <GalleryExport size="44" color="#d9e3f0" />
-          <div className={styles.info}>
-            <div className={styles.infotext}>
-              {isDragActive
-                ? 'Suelta la imagen aquí'
-                : 'Arrastra y suelta la imagen aquí, o haz clic para seleccionarla'}
+    <div className={styles.layout}>
+      <div>
+        <div className={styles.label}>{label}</div>
+        <div {...getRootProps({ style })}>
+          <input {...getInputProps()} />
+          <div className={styles.content}>
+            <GalleryExport size="44" color="#d9e3f0" />
+            <div className={styles.info}>
+              <div className={styles.infotext}>
+                {isDragActive
+                  ? 'Suelta la imagen aquí'
+                  : 'Arrastra y suelta la imagen aquí, o haz clic para seleccionarla'}
+              </div>
+              <div className={styles.infotype}>JPG o PNG de hasta 10 MB</div>
             </div>
-            <div className={styles.infotype}>JPG o PNG de hasta 10 MB</div>
+            <Button
+              variant="outlined"
+              color="primary"
+              classes={{ root: styles.button }}
+            >
+              imagen
+            </Button>
           </div>
-          <Button
-            variant="outlined"
-            color="primary"
-            classes={{ root: styles.button }}
-          >
-            imagen
-          </Button>
         </div>
       </div>
+      {showCrop && (
+        <>
+          <Crop
+            image={selectedImage}
+            setSelectedImage={setSelectedImage}
+            setShowCrop={setShowCrop}
+          />
+        </>
+      )}
     </div>
   )
 }
