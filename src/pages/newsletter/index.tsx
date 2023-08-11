@@ -12,6 +12,7 @@ import NewsletterForms from '@/components/newsletter/newsletterForms'
 import FinishButton from '@/components/newsletter/inputs/finishButton'
 import AWS from 'aws-sdk'
 import Footer from '@/components/newsletter/templates/footer'
+import axios from 'axios'
 
 const accessKeyId = process.env.NEXT_PUBLIC_AWS_CLIENT_ACCESS_KEY_ID as string
 const secretAccessKey = process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY as string
@@ -25,6 +26,10 @@ AWS.config.update({
 })
 
 export const s3Client = new AWS.S3()
+
+export const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL
+})
 
 const Newsletter = () => {
   const dispatch = useDispatch()

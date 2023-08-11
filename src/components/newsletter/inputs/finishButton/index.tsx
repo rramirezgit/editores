@@ -1,14 +1,37 @@
-import { SpeedDial, SpeedDialAction } from '@mui/material'
-import { Eye, Lock, Send2, Setting, DirectSend } from 'iconsax-react'
+import { Alert, SpeedDial, SpeedDialAction } from '@mui/material'
+import {
+  Eye,
+  Lock,
+  Send2,
+  Setting,
+  DirectSend,
+  LogoutCurve
+} from 'iconsax-react'
 import { useRouter } from 'next/router'
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { getSubcription } from '@/services/newsletter'
 
 const FinishButton = () => {
   const router = useRouter()
   const { user } = useUser()
 
   const handleClickPreview = () => {
-    router.push('/newsletter/previewHtml')
+    // consultar a todos los subscriptores
+    getSubcription()
+      .then(data => {
+        debugger
+        if (data) {
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    // obtener el id de cada subscriptor
+    // reemplazar el id del subscriptor en el link de unsubscribe
+    // enviar el email a cada subscriptor
+
+    // router.push('/newsletter/previewHtml')
   }
 
   const handleClickTest = () => {
@@ -21,7 +44,16 @@ const FinishButton = () => {
   }
 
   const actions = [
-    { icon: <Send2 />, name: 'Enviar', onClick: handleClickPreview },
+    {
+      icon: <LogoutCurve />,
+      name: 'Salir',
+      onClick: () => alert('en desarrollo 😉')
+    },
+    {
+      icon: <Send2 />,
+      name: 'Enviar a Subscriptores',
+      onClick: handleClickPreview
+    },
     { icon: <Eye />, name: 'Previsualizar', onClick: handleClickPreview },
     { icon: <Lock />, name: 'Probar', onClick: handleClickTest },
     { icon: <DirectSend />, name: 'Guardar', onClick: handleClickSave }
