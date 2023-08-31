@@ -7,9 +7,10 @@ import { UserProvider } from '@auth0/nextjs-auth0/client'
 import ProtectedRoute from '@/components/common/ProtectedRoutes'
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { user } = pageProps
   return (
     <Provider store={store}>
-      <UserProvider>
+      <UserProvider user={user}>
         <Theme>
           <ProtectedRoute>
             <Component {...pageProps} />

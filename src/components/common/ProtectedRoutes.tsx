@@ -10,6 +10,10 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user, error, isLoading } = useUser()
   const router = useRouter()
 
+  if (router.pathname.includes('/unsubscribe')) {
+    return <>{children}</>
+  }
+
   if (isLoading) {
     return <p>Cargando...</p>
   }

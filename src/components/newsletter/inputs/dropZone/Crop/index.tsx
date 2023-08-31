@@ -7,18 +7,18 @@ import ReactCrop, {
   centerCrop,
   makeAspectCrop,
   Crop,
-  PixelCrop,
-  convertToPixelCrop
+  PixelCrop
 } from 'react-image-crop'
-import { canvasPreview } from './canvasPreview'
 import { useEffect, DependencyList } from 'react'
 import 'react-image-crop/dist/ReactCrop.css'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store'
 import { s3Client } from '@/pages/newsletter'
 import { Button, Slider, Typography } from '@mui/material'
 import styles from './Crop.module.css'
 import ColorPicker from '@/components/newsletter/inputs/colorPicker'
+import { imgPreview } from './imgPreview'
+import CheckLabel from '@/components/common/inputs/checkLabel'
+import { useDispatch } from 'react-redux'
+import { setLoadImages } from '@/store/slices/newsletter'
 
 // This is to demonstate how to make and center a % aspect crop
 // which is a bit trickier so we use some helper functions.
@@ -45,23 +45,29 @@ interface Props {
   image: {
     file: any
     data: string
+    success: boolean
+    dataPreview: string
   }
   setSelectedImage: (image: any) => void
   setShowCrop?: (showCrop: boolean) => void
+  setAspectImage?: any
+  aspectImage?: boolean
 }
 
-export default function Crop({ image, setSelectedImage, setShowCrop }: Props) {
+export default function Crop({
+  image,
+  setSelectedImage,
+  setShowCrop,
+  setAspectImage,
+  aspectImage
+}: Props) {
   const imgRef = useRef<HTMLImageElement>(null)
-  const hiddenAnchorRef = useRef<HTMLAnchorElement>(null)
-  const blobUrlRef = useRef('')
   const [crop, setCrop] = useState<Crop>()
   const [completedCrop, setCompletedCrop] = useState<PixelCrop>()
   const [scale, setScale] = useState(1)
   const [rotate, setRotate] = useState(0)
-  const [aspect, setAspect] = useState<number | undefined>(16 / 9)
-  const { previewCanvasRef } = useSelector(
-    (state: RootState) => state.newsletter
-  )
+  const [aspect, setAspect] = useState<number | undefined>()
+  const dispatch = useDispatch()
 
   function onImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
     if (aspect) {
@@ -71,12 +77,14 @@ export default function Crop({ image, setSelectedImage, setShowCrop }: Props) {
   }
 
   function onDownloadCropClick() {
-    if (!previewCanvasRef.current) {
-      throw new Error('Crop canvas does not exist')
+    if (image?.dataPreview?.length === 0) {
+      throw new Error('No image to download')
     }
 
-    const base64Image = previewCanvasRef.current.toDataURL(image.file.type)
-    const base64Data = base64Image.replace(/^data:image\/\w+;base64,/, '')
+    const base64Data = image?.dataPreview.replace(
+      /^data:image\/\w+;base64,/,
+      ''
+    )
     const buffer = Buffer.from(base64Data, 'base64')
 
     s3Client.upload(
@@ -93,14 +101,18 @@ export default function Crop({ image, setSelectedImage, setShowCrop }: Props) {
           setShowCrop && setShowCrop(false)
           return
         }
+        dispatch(setLoadImages(false))
+        setShowCrop && setShowCrop(false)
         setSelectedImage({
           data: data.Location,
           file: {
             name: image.file.name,
             type: image.file.type
-          }
+          },
+          dataPreview: '',
+          success: true,
+          manteinAspect: aspectImage
         })
-        setShowCrop && setShowCrop(false)
       }
     )
   }
@@ -119,37 +131,43 @@ export default function Crop({ image, setSelectedImage, setShowCrop }: Props) {
 
   useDebounceEffect(
     async () => {
-      if (
-        completedCrop?.width &&
-        completedCrop?.height &&
-        imgRef.current &&
-        previewCanvasRef.current
-      ) {
-        // We use canvasPreview as it's much faster than imgPreview.
-        canvasPreview(
-          imgRef.current,
-          previewCanvasRef.current,
-          completedCrop,
-          scale,
-          rotate
-        )
+      if (completedCrop?.width && completedCrop?.height && imgRef?.current) {
+        const b64 = imgPreview(imgRef.current, completedCrop, scale, rotate)
+        setSelectedImage({
+          data: image.data,
+          file: image.file,
+          success: false,
+          dataPreview: b64,
+          manteinAspect: aspectImage
+        })
       }
     },
     100,
     [completedCrop, scale, rotate]
   )
 
-  function handleToggleAspectClick() {
-    if (aspect) {
-      setAspect(undefined)
-    } else if (imgRef.current) {
-      const { width, height } = imgRef.current
-      setAspect(16 / 9)
-      const newCrop = centerAspectCrop(width, height, 16 / 9)
-      setCrop(newCrop)
-      // Updates the preview
-      setCompletedCrop(convertToPixelCrop(newCrop, width, height))
-    }
+  function handleToggleAspectClick(e: any) {
+    setSelectedImage({
+      data: image.data,
+      file: image.file,
+      success: false,
+      dataPreview: image.dataPreview,
+      manteinAspect: e.target.checked
+    })
+    setAspectImage && setAspectImage(e.target.checked)
+  }
+
+  const onCancelCropClick = () => {
+    dispatch(setLoadImages(false))
+
+    setSelectedImage({
+      data: 'Ñ=',
+      file: '',
+      success: false,
+      dataPreview: '',
+      manteinAspect: aspectImage
+    })
+    setShowCrop && setShowCrop(false)
   }
 
   return (
@@ -194,13 +212,10 @@ export default function Crop({ image, setSelectedImage, setShowCrop }: Props) {
         <ColorPicker label="Fondo imagen" name="bagroundColor" />
 
         <div>
-          <Button
+          <CheckLabel
+            label="Ajustar imagen"
             onClick={handleToggleAspectClick}
-            color={aspect ? 'warning' : 'primary'}
-            variant="outlined"
-          >
-            Cambiar Aspecto {aspect ? 'desactivado' : 'activado'}
-          </Button>
+          />
         </div>
       </div>
       {!!image.data && (
@@ -208,7 +223,6 @@ export default function Crop({ image, setSelectedImage, setShowCrop }: Props) {
           crop={crop}
           onChange={(_, percentCrop) => setCrop(percentCrop)}
           onComplete={c => setCompletedCrop(c)}
-          aspect={aspect}
         >
           <img
             ref={imgRef}
@@ -219,19 +233,18 @@ export default function Crop({ image, setSelectedImage, setShowCrop }: Props) {
           />
         </ReactCrop>
       )}
-      {!!completedCrop && (
-        <>
-          <div>
-            <Button
-              onClick={onDownloadCropClick}
-              color="warning"
-              variant="contained"
-            >
-              Recortar
-            </Button>
-          </div>
-        </>
-      )}
+      <div className={styles.buttons}>
+        <Button onClick={onCancelCropClick} color="warning" variant="contained">
+          Cancelar
+        </Button>
+        <Button
+          onClick={onDownloadCropClick}
+          color="primary"
+          variant="contained"
+        >
+          Guardar
+        </Button>
+      </div>
     </div>
   )
 }

@@ -9,11 +9,16 @@ import { useDispatch } from 'react-redux'
 import { setTemplateValues } from '@/store/slices/newsletter'
 
 const HeaderOptions = ({ values }: any) => {
+  const [value, setValue] = React.useState(0)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(setTemplateValues(values))
   }, [values])
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue)
+  }
 
   return (
     <BasicTabs
@@ -45,6 +50,8 @@ const HeaderOptions = ({ values }: any) => {
           Panel: ImgHeader
         }
       ]}
+      value={value}
+      handleChange={handleChange}
     />
   )
 }

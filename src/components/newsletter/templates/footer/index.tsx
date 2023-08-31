@@ -10,7 +10,7 @@ const socialMedia = [
   },
   {
     id: 2,
-    img: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/_Twitter.png',
+    img: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/layer1.png',
     href: 'https://twitter.com/adacblog?s=11&t=X1mzTgR73CGzDc5inpfG3Q'
   },
   {
@@ -50,7 +50,9 @@ const Footer = () => {
         ))}
       </div>
       <div style={stringStyle.unsubscribe_content}>
-        <a style={stringStyle.unsubscribe}>Unsubscribe</a>
+        <a style={stringStyle.unsubscribe} href="{{urlUnsubscribe}}">
+          Unsubscribe
+        </a>
       </div>
       <div style={stringStyle.footer_image}>
         <img

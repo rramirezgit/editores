@@ -73,7 +73,7 @@ const stringStyle: { [key: string]: CSSProperties } = {
     margin: '0px 5px'
   },
   news_template_tag: {
-    width: 'max-content',
+    width: '35.81px',
     height: '12.8px',
     borderRadius: '4px',
     background: 'rgba(36, 143, 153, 0.41)',

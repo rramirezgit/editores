@@ -1,0 +1,79 @@
+.bg {
+  background-image: url(../../assets/ADAC_BG.svg);
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.nav {
+  padding: 1rem;
+}
+.logo {
+  width: 200px;
+  height: 100px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.contentdata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 700px;
+  justify-content: center;
+  gap: 2rem;
+  padding: 15px;
+}
+
+.title {
+  color: #29394e;
+  text-align: center;
+  font-family: 'Gotham Rounded Bold';
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 350;
+  line-height: normal;
+}
+
+.text {
+  color: #29394e;
+  text-align: center;
+  font-family: 'Gotham Rounded Light';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 325;
+  line-height: normal;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (max-width: 495px) {
+  .nav {
+    padding: 0.5rem;
+  }
+  .logo {
+    width: 150px;
+    height: 75px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .text {
+    font-size: 14px;
+  }
+}

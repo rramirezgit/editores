@@ -4,7 +4,7 @@ import ShareIcon from '@mui/icons-material/Share'
 import stringStyle from './stringStyles'
 import styles from './news.module.css'
 
-interface NewsTemplateProps {
+interface PublicityProps {
   textHeader: string
   img: {
     path: string
@@ -18,19 +18,17 @@ interface NewsTemplateProps {
   text: string
   color: string
   bagroundColor: string
-  htmlEmail?: boolean
 }
 
-const NewsTemplate = ({
+const PublicityTemplate = ({
   textHeader,
   img,
   title,
   tags = [],
   text,
   color,
-  bagroundColor,
-  htmlEmail = false
-}: NewsTemplateProps) => {
+  bagroundColor
+}: PublicityProps) => {
   interface ReadingTimeProps {
     text: string
     wordsPerMinute: number
@@ -162,4 +160,4 @@ const NewsTemplate = ({
   )
 }
 
-export default NewsTemplate
+export default PublicityTemplate

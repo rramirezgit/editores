@@ -9,37 +9,59 @@ import {
 } from 'iconsax-react'
 import { useRouter } from 'next/router'
 import { useUser } from '@auth0/nextjs-auth0/client'
-import { getSubcription } from '@/services/newsletter'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
+import { getHtml } from '@/hooks/sendDataNewsletter'
+import useAWSSes from '@/hooks/aws/ses'
 
 const FinishButton = () => {
   const router = useRouter()
   const { user } = useUser()
+  const { loadImages } = useSelector((state: RootState) => state.newsletter)
+  const { sendEmail } = useAWSSes(
+    process.env.NEXT_PUBLIC_AWS_CLIENT_ACCESS_KEY_ID as string,
+    process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY as string,
+    process.env.NEXT_PUBLIC_AWS_REGION as string
+  )
+
+  const handleClickSendToSubcriptions = () => {
+    if (loadImages) {
+      alert('Tiene una edición de imagen en proceso')
+      return
+    }
+    router.push('/newsletter/saveHtml')
+  }
 
   const handleClickPreview = () => {
-    // consultar a todos los subscriptores
-    getSubcription()
-      .then(data => {
-        debugger
-        if (data) {
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-
-    // obtener el id de cada subscriptor
-    // reemplazar el id del subscriptor en el link de unsubscribe
-    // enviar el email a cada subscriptor
-
-    // router.push('/newsletter/previewHtml')
+    if (loadImages) {
+      alert('Tiene una edición de imagen en proceso')
+      return
+    }
+    router.push('/newsletter/previewHtml')
   }
 
   const handleClickTest = () => {
+    if (loadImages) {
+      alert('Tiene una edición de imagen en proceso')
+      return
+    }
     if (!user) router.push('/api/auth/login')
-    alert(user?.email)
+    const email = prompt('Ingrese el correo a enviar')
+    const regex = /\S+@\S+\.\S+/
+    if (!regex.test(email as string)) {
+      alert('Correo invalido')
+      return
+    }
+    if (email) {
+      router.push('/newsletter/saveHtml/' + email)
+    }
   }
 
   const handleClickSave = () => {
+    if (loadImages) {
+      alert('Tiene una edición de imagen en proceso')
+      return
+    }
     router.push('/newsletter/saveHtml')
   }
 
@@ -47,16 +69,18 @@ const FinishButton = () => {
     {
       icon: <LogoutCurve />,
       name: 'Salir',
-      onClick: () => alert('en desarrollo 😉')
+      onClick: () => {
+        router.push('/api/auth/logout')
+      }
     },
     {
       icon: <Send2 />,
       name: 'Enviar a Subscriptores',
-      onClick: handleClickPreview
+      onClick: handleClickSendToSubcriptions
     },
     { icon: <Eye />, name: 'Previsualizar', onClick: handleClickPreview },
-    { icon: <Lock />, name: 'Probar', onClick: handleClickTest },
-    { icon: <DirectSend />, name: 'Guardar', onClick: handleClickSave }
+    { icon: <Lock />, name: 'Probar', onClick: handleClickTest }
+    // { icon: <DirectSend />, name: 'Guardar', onClick: handleClickSave }
   ]
 
   return (

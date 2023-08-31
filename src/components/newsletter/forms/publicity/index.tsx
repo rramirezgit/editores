@@ -1,18 +1,21 @@
 import { Formik } from 'formik'
+import React from 'react'
 import initialValues from './initialValues'
 import validationSchema from './validationSchema'
-import HeaderOptions from './HeaderOptions'
+import NewsOptions from './newsOptions'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
-const HeaderForm = () => {
+interface NewsFormProps {
+  id: string
+}
+
+const NewsForm = ({ id }: NewsFormProps) => {
   const {
-    templates: { header }
+    templates: { news }
   } = useSelector((state: RootState) => state.newsletter)
-
-  const inialValuesForm = initialValues(header)
+  const inialValuesForm = initialValues(news.find(item => item.id === id))
   const validationSchemaForm = validationSchema()
-
   return (
     <Formik
       initialValues={inialValuesForm}
@@ -24,7 +27,7 @@ const HeaderForm = () => {
       {({ values }) => {
         return (
           <>
-            <HeaderOptions values={values} />
+            <NewsOptions values={values} id={id} />
           </>
         )
       }}
@@ -32,4 +35,4 @@ const HeaderForm = () => {
   )
 }
 
-export default HeaderForm
+export default NewsForm
