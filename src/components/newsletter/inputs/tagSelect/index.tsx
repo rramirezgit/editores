@@ -8,22 +8,21 @@ interface Option {
   label: string
   id: number
 }
-
 const options: Option[] = [
-  { id: 1, label: 'option 1' },
-  { id: 2, label: 'option 2' },
-  { id: 3, label: 'option 3' },
-  { id: 4, label: 'option 4' },
-  { id: 5, label: 'option 5' },
-  { id: 6, label: 'option 6' },
-  { id: 7, label: 'option 7' },
-  { id: 8, label: 'option 8' },
-  { id: 9, label: 'option 9' },
-  { id: 10, label: 'option 10' },
-  { id: 11, label: 'option 11' },
-  { id: 12, label: 'option 12' },
-  { id: 13, label: 'option 13' },
-  { id: 14, label: 'option 14' }
+  { id: 1, label: 'CIBERATAQUES' },
+  { id: 2, label: 'FINTECH' },
+  { id: 3, label: 'CIBERSEGURIDAD' },
+  { id: 4, label: 'LEYMICA' },
+  { id: 5, label: 'TECNOLOGIA' },
+  { id: 6, label: 'ECONOMIA' },
+  { id: 7, label: 'INNOVACION' },
+  { id: 8, label: 'BITCOIN' },
+  { id: 9, label: 'CRYPTOMONEDAS' },
+  { id: 10, label: 'BLOCKCHAIN' },
+  { id: 11, label: 'DEFI' },
+  { id: 12, label: 'NFT' },
+  { id: 13, label: 'FINANZAS' },
+  { id: 14, label: 'BANCA' }
 ]
 
 interface Props {

@@ -12,7 +12,6 @@ const ImgHeader = () => {
   return (
     <>
       <Layout>
-        <DropZone label="Imagen de encabezado" name="imgHeader" />
         <Check name="haveSponsored" label="Agregar patrocinador" />
         {haveSponsored && (
           <DropZone label="Imagen de encabezado" name="imgSponsored" />

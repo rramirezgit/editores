@@ -60,15 +60,16 @@ type tabs = {
 interface BasicTabsProps {
   tabPanels: tabPanels[]
   tabs: tabs[]
+  value: number
+  handleChange: any
 }
 
-const BasicTabs = ({ tabPanels, tabs }: BasicTabsProps) => {
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
-
+const BasicTabs = ({
+  tabPanels,
+  tabs,
+  value,
+  handleChange
+}: BasicTabsProps) => {
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

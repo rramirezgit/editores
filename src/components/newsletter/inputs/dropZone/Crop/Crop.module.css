@@ -14,3 +14,10 @@
 .colorPicket {
   margin: 10px 0px;
 }
+
+.buttons {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+}

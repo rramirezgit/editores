@@ -36,7 +36,8 @@ const Newsletter = () => {
   const {
     templates: {
       header: { haveSponsored, imgSponsored, imgHeader, color, textHeader },
-      news
+      news,
+      publicity
     },
     showSelectTemplate,
     templateIdEditing
@@ -66,6 +67,21 @@ const Newsletter = () => {
           />
         </TemplatesOptions>
         {news.map((item, index) => {
+          return (
+            <TemplatesOptions key={index} id={item.id}>
+              <NewsTemplate
+                textHeader={item.textHeader}
+                img={item.img}
+                title={item.title}
+                tags={item.tags}
+                text={item.text}
+                color={item.color}
+                bagroundColor={item.bagroundColor}
+              />
+            </TemplatesOptions>
+          )
+        })}
+        {publicity.map((item, index) => {
           return (
             <TemplatesOptions key={index} id={item.id}>
               <NewsTemplate

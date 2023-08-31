@@ -187,6 +187,16 @@
     U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: 'Gotham Rounded Bold';
+  src: url('../assets/fonts/GothamRounded-Bold.otf');
+}
+
+@font-face {
+  font-family: 'Gotham Rounded Light';
+  src: url('../assets/fonts/GothamRounded-Light.otf');
+}
+
 p {
   font-family: 'Open Sans' !important;
 }
@@ -220,4 +230,8 @@ p {
 /* Estilo del pulgar de la barra de desplazamiento horizontal */
 ::-webkit-scrollbar-thumb:horizontal {
   background-color: #888; /* Color del pulgar horizontal */
+}
+
+.ReactCrop {
+  border: dashed 1px #ccc;
 }

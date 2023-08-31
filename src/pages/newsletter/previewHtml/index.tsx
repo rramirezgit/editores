@@ -68,6 +68,7 @@ const PreviewHtml = () => {
                 text={news.text}
                 tags={news.tags}
                 bagroundColor={news.bagroundColor}
+                htmlEmail={true}
               />
             ))}
           </td>

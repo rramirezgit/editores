@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   background-color: #b7c9cf78;
-  padding: 0 1rem;
+  padding: 1rem;
 }
 
 .show {
@@ -25,18 +25,7 @@
 }
 
 .template1 {
-  height: 200px;
-  width: 232px;
-  left: 55px;
-  top: 267px;
-  border-radius: 8px;
-  background: #cdd2e7;
-  margin: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 8px;
-  gap: 5px;
+  padding: 10px;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
@@ -80,4 +69,9 @@
   width: 15px;
   border-radius: 50%;
   background: #adb1c7;
+}
+
+.contentTags {
+  height: 85vh;
+  overflow-y: scroll;
 }

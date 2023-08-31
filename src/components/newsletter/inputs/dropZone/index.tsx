@@ -7,6 +7,8 @@ import { Button } from '@mui/material'
 import { useField } from 'formik'
 import { useEffect, useState } from 'react'
 import Crop from './Crop'
+import { setLoadImages } from '@/store/slices/newsletter'
+import { useDispatch } from 'react-redux'
 
 const baseStyle = {
   flex: 1,
@@ -43,18 +45,30 @@ interface DropZoneProps {
 const DropZone = ({ label, ...props }: DropZoneProps) => {
   const [, , helpers] = useField(props)
   const [showCrop, setShowCrop] = useState(false)
+  const [aspectImage, setaspectImage] = useState(false)
   const [selectedImage, setSelectedImage] = useState<any>({
     file: '',
     data: '',
-    path: ''
+    dataPreview: '',
+    path: '',
+    manteinAspect: aspectImage
   })
+  const dispatch = useDispatch()
 
   const handleDrop = (acceptedFiles: any[]) => {
     const file: any = acceptedFiles[0]
     const reader = new FileReader()
     reader.onload = async e => {
-      setSelectedImage({ file, data: e.target?.result })
-      setShowCrop(true)
+      if (e.target?.result) {
+        setSelectedImage({
+          file,
+          data: e.target?.result,
+          dataPreview: e.target?.result,
+          manteinAspect: aspectImage
+        })
+        setShowCrop(true)
+        dispatch(setLoadImages(true))
+      }
     }
     reader.readAsDataURL(file)
   }
@@ -82,7 +96,7 @@ const DropZone = ({ label, ...props }: DropZoneProps) => {
   )
 
   useEffect(() => {
-    if (selectedImage) {
+    if (selectedImage.data !== '' && selectedImage.data !== undefined) {
       helpers.setValue(selectedImage)
     }
   }, [selectedImage])
@@ -119,6 +133,8 @@ const DropZone = ({ label, ...props }: DropZoneProps) => {
             image={selectedImage}
             setSelectedImage={setSelectedImage}
             setShowCrop={setShowCrop}
+            setAspectImage={setaspectImage}
+            aspectImage={aspectImage}
           />
         </>
       )}

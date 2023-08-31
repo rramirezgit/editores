@@ -20,11 +20,13 @@ export interface newsletterState {
       title: string
     }
     news: any[]
+    publicity: any[]
   }
 
   showSelectTemplate: boolean
   templateIdEditing: string
-  previewCanvasRef?: any
+  previewImageb64?: any
+  loadImages: boolean
 }
 
 const initialState: newsletterState = {
@@ -45,10 +47,12 @@ const initialState: newsletterState = {
       type: 'header',
       title: 'Encabezado'
     },
-    news: []
+    news: [],
+    publicity: []
   },
   showSelectTemplate: false,
-  templateIdEditing: '0'
+  templateIdEditing: '0',
+  loadImages: false
 }
 
 export const newsletter = createSlice({
@@ -82,6 +86,23 @@ export const newsletter = createSlice({
       state.templates.news.push(newNews)
       state.templateIdEditing = action.payload.id
     },
+    addPublicity: (state, action) => {
+      const newPublicity = {
+        id: action.payload.id,
+        type: 'news',
+        textHeader: 'texto del header',
+        color: '#39C0CC',
+        img: '',
+        title: '',
+        text: 'loren ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt',
+        readingTime: '',
+        tags: [],
+        bagroundColor: '#a7a7a7bd'
+      }
+      state.templates.publicity.push(newPublicity)
+      state.templateIdEditing = action.payload.id
+    },
+
     setTemplateIdEditing: (state, action: PayloadAction<string>) => {
       state.templateIdEditing = action.payload
     },
@@ -121,8 +142,11 @@ export const newsletter = createSlice({
         state.templates.news[index + 1] = news
       }
     },
-    setPreviewCanvasRef: (state, action) => {
-      state.previewCanvasRef = action.payload
+    setPreviewImageB64: (state, action) => {
+      state.previewImageb64 = action.payload
+    },
+    setLoadImages: (state, action) => {
+      state.loadImages = action.payload
     }
   }
 })
@@ -131,11 +155,13 @@ export const {
   setTemplateValues,
   setShowSelectTemplate,
   addNews,
+  addPublicity,
   setTemplateIdEditing,
   setOrdererNews,
   setNewsValuesByid,
   deleteNewsById,
-  setPreviewCanvasRef
+  setPreviewImageB64,
+  setLoadImages
 } = newsletter.actions
 
 export default newsletter.reducer
