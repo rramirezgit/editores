@@ -18,7 +18,6 @@ interface NewsTemplateProps {
   text: string
   color: string
   bagroundColor: string
-  htmlEmail?: boolean
 }
 
 const NewsTemplate = ({
@@ -28,8 +27,7 @@ const NewsTemplate = ({
   tags = [],
   text,
   color,
-  bagroundColor,
-  htmlEmail = false
+  bagroundColor
 }: NewsTemplateProps) => {
   interface ReadingTimeProps {
     text: string

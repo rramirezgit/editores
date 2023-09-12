@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import useAWSSes from '@/hooks/aws/ses'
 import Footer from '@/components/newsletter/templates/footer'
 import { getSubcription } from '@/services/newsletter'
+import PublicityTemplate from '@/components/newsletter/templates/publicity'
 
 const SaveHTML = () => {
   const { templates } = useSelector((state: RootState) => state.newsletter)
@@ -149,17 +150,10 @@ const SaveHTML = () => {
         <tr>
           <td align="center">
             {templates.news.map((news, index) => (
-              <NewsTemplate
-                key={index}
-                color={news.color}
-                img={news.img}
-                title={news.title}
-                textHeader={news.textHeader}
-                text={news.text}
-                tags={news.tags}
-                bagroundColor={news.bagroundColor}
-                htmlEmail={true}
-              />
+              <NewsTemplate key={index} {...news} />
+            ))}
+            {templates.publicity.map((publicity, index) => (
+              <PublicityTemplate key={index} {...publicity} />
             ))}
           </td>
         </tr>

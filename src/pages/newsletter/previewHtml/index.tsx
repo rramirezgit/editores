@@ -6,6 +6,7 @@ import { IconButton } from '@mui/material'
 import { Back } from 'iconsax-react'
 import { useRouter } from 'next/router'
 import Footer from '@/components/newsletter/templates/footer'
+import PublicityTemplate from '@/components/newsletter/templates/publicity'
 
 const PreviewHtml = () => {
   const { templates } = useSelector((state: RootState) => state.newsletter)
@@ -59,17 +60,10 @@ const PreviewHtml = () => {
         <tr>
           <td align="center">
             {templates.news.map((news, index) => (
-              <NewsTemplate
-                key={index}
-                color={news.color}
-                img={news.img}
-                title={news.title}
-                textHeader={news.textHeader}
-                text={news.text}
-                tags={news.tags}
-                bagroundColor={news.bagroundColor}
-                htmlEmail={true}
-              />
+              <NewsTemplate key={index} {...news} />
+            ))}
+            {templates.publicity.map((publicity, index) => (
+              <PublicityTemplate key={index} {...publicity} />
             ))}
           </td>
         </tr>

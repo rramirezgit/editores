@@ -1,20 +1,21 @@
 import BasicTabs from '@/components/common/BasicTabs'
-import { TextalignLeft, Brush2, Gallery } from 'iconsax-react'
+import { TextalignLeft, Brush2, Gallery, Link1 } from 'iconsax-react'
 import React from 'react'
 import TextHeader from './text'
 import ImgHeader from './img'
 import ColorsHeader from './color'
+import UrlSocialMedia from './url'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setNewsValuesByid } from '@/store/slices/newsletter'
+import { setPublicityValuesByid } from '@/store/slices/newsletter'
 import { RootState } from '@/store'
 
-interface NewsOptionsProps {
+interface PublicityOptionsProps {
   values: any
   id: string
 }
 
-const NewsOptions = ({ values, id }: NewsOptionsProps) => {
+const PublicityOptions = ({ values, id }: PublicityOptionsProps) => {
   const [value, setValue] = React.useState(0)
   const dispatch = useDispatch()
   const { loadImages } = useSelector((state: RootState) => state.newsletter)
@@ -37,7 +38,7 @@ const NewsOptions = ({ values, id }: NewsOptionsProps) => {
         `<p style="margin:5px 0 0 0">`
       )
     }
-    dispatch(setNewsValuesByid({ ...dataValues, id }))
+    dispatch(setPublicityValuesByid({ ...dataValues, id }))
   }, [values])
 
   return (
@@ -54,6 +55,10 @@ const NewsOptions = ({ values, id }: NewsOptionsProps) => {
         {
           index: 2,
           icon: <Gallery size="20" variant="Outline" />
+        },
+        {
+          index: 3,
+          icon: <Link1 size="20" />
         }
       ]}
       tabPanels={[
@@ -68,6 +73,10 @@ const NewsOptions = ({ values, id }: NewsOptionsProps) => {
         {
           index: 2,
           Panel: ImgHeader
+        },
+        {
+          index: 3,
+          Panel: UrlSocialMedia
         }
       ]}
       value={value}
@@ -76,4 +85,4 @@ const NewsOptions = ({ values, id }: NewsOptionsProps) => {
   )
 }
 
-export default NewsOptions
+export default PublicityOptions

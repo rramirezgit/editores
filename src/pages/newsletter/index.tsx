@@ -13,6 +13,7 @@ import FinishButton from '@/components/newsletter/inputs/finishButton'
 import AWS from 'aws-sdk'
 import Footer from '@/components/newsletter/templates/footer'
 import axios from 'axios'
+import PublicityTemplate from '@/components/newsletter/templates/publicity'
 
 const accessKeyId = process.env.NEXT_PUBLIC_AWS_CLIENT_ACCESS_KEY_ID as string
 const secretAccessKey = process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY as string
@@ -69,30 +70,14 @@ const Newsletter = () => {
         {news.map((item, index) => {
           return (
             <TemplatesOptions key={index} id={item.id}>
-              <NewsTemplate
-                textHeader={item.textHeader}
-                img={item.img}
-                title={item.title}
-                tags={item.tags}
-                text={item.text}
-                color={item.color}
-                bagroundColor={item.bagroundColor}
-              />
+              <NewsTemplate {...item} />
             </TemplatesOptions>
           )
         })}
         {publicity.map((item, index) => {
           return (
             <TemplatesOptions key={index} id={item.id}>
-              <NewsTemplate
-                textHeader={item.textHeader}
-                img={item.img}
-                title={item.title}
-                tags={item.tags}
-                text={item.text}
-                color={item.color}
-                bagroundColor={item.bagroundColor}
-              />
+              <PublicityTemplate {...item} />
             </TemplatesOptions>
           )
         })}

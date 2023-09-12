@@ -1,6 +1,6 @@
 import { IconButton, Tooltip } from '@mui/material'
 import styles from './selectNewsTemplate.module.css'
-import { CloseCircle, Gallery } from 'iconsax-react'
+import { CloseCircle } from 'iconsax-react'
 import { useDispatch } from 'react-redux'
 import {
   addNews,
@@ -10,9 +10,9 @@ import {
 import { add } from 'date-fns'
 import newsImage from '@/assets/thumbnail/Noticias.png'
 import publicityImage from '@/assets/thumbnail/Publicidad.png'
-import fondeo from '@/assets/thumbnail/Fondeo.png'
-import graficas from '@/assets/thumbnail/Graficas.png'
-import quote from '@/assets/thumbnail/Quote.png'
+// import fondeo from '@/assets/thumbnail/Fondeo.png'
+// import graficas from '@/assets/thumbnail/Graficas.png'
+// import quote from '@/assets/thumbnail/Quote.png'
 import Image from 'next/image'
 
 const SelectNewsTemplate = () => {
@@ -32,7 +32,7 @@ const SelectNewsTemplate = () => {
   const handleClickPublicity = () => {
     dispatch(
       addPublicity({
-        id: `news-${add(new Date(), { seconds: 1 }).getTime().toString()}`
+        id: `publicity-${add(new Date(), { seconds: 1 }).getTime().toString()}`
       })
     )
     dispatch(setShowSelectTemplate(false))
@@ -59,7 +59,7 @@ const SelectNewsTemplate = () => {
           </div>
         </div>
 
-        {/* <div>
+        <div>
           <div className={styles.title}>publicidad</div>
           <div onClick={handleClickPublicity}>
             <Image
@@ -69,7 +69,7 @@ const SelectNewsTemplate = () => {
             />
           </div>
         </div>
-
+        {/* 
         <div>
           <div className={styles.title}>Fondeo</div>
           <div onClick={handleClickPublicity}>

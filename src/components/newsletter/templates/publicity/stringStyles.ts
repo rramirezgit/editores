@@ -1,4 +1,3 @@
-import { TextalignCenter } from 'iconsax-react'
 import { CSSProperties } from 'react'
 
 const stringStyle: { [key: string]: CSSProperties } = {
@@ -111,6 +110,10 @@ const stringStyle: { [key: string]: CSSProperties } = {
   },
   icon__news_template_hover: {
     background: '#f9bb19'
+  },
+  news_SocialMedia: {
+    margin: '25px 0px 0px',
+    padding: 'auto'
   }
 }
 

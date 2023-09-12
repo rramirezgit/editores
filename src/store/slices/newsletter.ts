@@ -97,7 +97,12 @@ export const newsletter = createSlice({
         text: 'loren ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt',
         readingTime: '',
         tags: [],
-        bagroundColor: '#a7a7a7bd'
+        bagroundColor: '#a7a7a7bd',
+        Facebook: '',
+        Instagram: '',
+        Twitter: '',
+        Linkedin: '',
+        Tiktok: ''
       }
       state.templates.publicity.push(newPublicity)
       state.templateIdEditing = action.payload.id
@@ -109,14 +114,15 @@ export const newsletter = createSlice({
     setNewsValuesByid: (state, action) => {
       const news = state.templates.news.find(n => n.id === action.payload.id)
       if (news) {
-        news.textHeader = action.payload.textHeader
-        news.color = action.payload.color
-        news.img = action.payload.img
-        news.title = action.payload.title
-        news.text = action.payload.text
-        news.readingTime = action.payload.readingTime
-        news.tags = action.payload.tags
-        news.bagroundColor = action.payload.bagroundColor
+        Object.assign(news, action.payload)
+      }
+    },
+    setPublicityValuesByid: (state, action) => {
+      const publicity = state.templates.publicity.find(
+        n => n.id === action.payload.id
+      )
+      if (publicity) {
+        Object.assign(publicity, action.payload)
       }
     },
     deleteNewsById: (state, action) => {
@@ -159,6 +165,7 @@ export const {
   setTemplateIdEditing,
   setOrdererNews,
   setNewsValuesByid,
+  setPublicityValuesByid,
   deleteNewsById,
   setPreviewImageB64,
   setLoadImages

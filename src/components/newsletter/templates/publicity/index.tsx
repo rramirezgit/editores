@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Archive } from 'iconsax-react'
-import ShareIcon from '@mui/icons-material/Share'
 import stringStyle from './stringStyles'
 import styles from './news.module.css'
+import socialmediaStyle from '@/components/common/socialMedia/socialmediaStyle'
+import { useEffect, useState } from 'react'
+import styled from '@emotion/styled'
 
 interface PublicityProps {
   textHeader: string
@@ -18,33 +19,60 @@ interface PublicityProps {
   text: string
   color: string
   bagroundColor: string
+  Facebook?: string
+  Instagram?: string
+  Twitter?: string
+  Linkedin?: string
+  Tiktok?: string
+  socialMediasColor?: string
 }
 
 const PublicityTemplate = ({
   textHeader,
   img,
   title,
-  tags = [],
   text,
   color,
-  bagroundColor
+  bagroundColor,
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Tiktok,
+  socialMediasColor
 }: PublicityProps) => {
-  interface ReadingTimeProps {
-    text: string
-    wordsPerMinute: number
-  }
-  const calculateReadingTime = ({ text, wordsPerMinute }: ReadingTimeProps) => {
-    const words = text.split(/\s+/).filter(word => word !== '')
+  const [SocialMedia, setSocialMedia] = useState<any[]>([])
 
-    const wordCount = words.length
-
-    const readingTimeMinutes = wordCount / wordsPerMinute
-
-    return readingTimeMinutes
-  }
-
-  console.log('htmlEmail', img)
-
+  useEffect(() => {
+    const dataSocialMedia = [
+      {
+        id: 1,
+        img: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/_Instagram.png',
+        href: Instagram
+      },
+      {
+        id: 2,
+        img: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/layer1.png',
+        href: Twitter
+      },
+      {
+        id: 3,
+        img: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/_TikTok.png',
+        href: Tiktok
+      },
+      {
+        id: 4,
+        img: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/_Linkedin.png',
+        href: Linkedin
+      },
+      {
+        id: 5,
+        img: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/_Facebook_.png',
+        href: Facebook
+      }
+    ]
+    setSocialMedia(dataSocialMedia)
+  }, [Facebook, Instagram, Twitter, Linkedin, Tiktok])
   return (
     <>
       <div
@@ -114,39 +142,6 @@ const PublicityTemplate = ({
             dangerouslySetInnerHTML={{ __html: title }}
             className={styles.contentTitle}
           ></div>
-          <div style={stringStyle.news_template_contentinfo}>
-            <div style={stringStyle.news_template_info}>
-              <div style={stringStyle.news_template_infodate}>
-                <div>
-                  {new Date().toLocaleDateString('es-ES', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                  {' - ' +
-                    calculateReadingTime({ text, wordsPerMinute: 250 }).toFixed(
-                      2
-                    ) +
-                    ' min lectura'}
-                </div>
-              </div>
-              <div style={stringStyle.news_template_tags}>
-                {tags.map((item: any, index) => (
-                  <div key={index} style={stringStyle.news_template_tag}>
-                    {item.label}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div style={stringStyle.news_template_btns}>
-              <div style={stringStyle.news_template_btn}>
-                <Archive size="16" />
-              </div>
-              <div style={stringStyle.news_template_btn}>
-                <ShareIcon sx={{ fontSize: '16px' }} />
-              </div>
-            </div>
-          </div>
           <div
             style={{
               ...stringStyle.news_template_text,
@@ -154,6 +149,31 @@ const PublicityTemplate = ({
             }}
             dangerouslySetInnerHTML={{ __html: text }}
           ></div>
+          <div style={stringStyle.news_SocialMedia}>
+            <div style={socialmediaStyle.footer_socialMedia_content}>
+              {SocialMedia.map((item: any, index: number) => {
+                if (!item.href) return null
+                return (
+                  <a
+                    key={index}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div
+                      key={index}
+                      style={{
+                        ...socialmediaStyle.footer_socialMedia,
+                        backgroundColor: socialMediasColor
+                      }}
+                    >
+                      <img src={item.img} alt="img" width={18} height={18} />
+                    </div>
+                  </a>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </>

@@ -2,20 +2,22 @@ import { Formik } from 'formik'
 import React from 'react'
 import initialValues from './initialValues'
 import validationSchema from './validationSchema'
-import NewsOptions from './newsOptions'
+import PublicityOptions from './PublicityOptions'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 
-interface NewsFormProps {
+interface PublicityFormProps {
   id: string
 }
 
-const NewsForm = ({ id }: NewsFormProps) => {
+const PublicityForm = ({ id }: PublicityFormProps) => {
   const {
-    templates: { news }
+    templates: { publicity }
   } = useSelector((state: RootState) => state.newsletter)
-  const inialValuesForm = initialValues(news.find(item => item.id === id))
+
+  const inialValuesForm = initialValues(publicity.find(item => item.id === id))
   const validationSchemaForm = validationSchema()
+
   return (
     <Formik
       initialValues={inialValuesForm}
@@ -27,7 +29,7 @@ const NewsForm = ({ id }: NewsFormProps) => {
       {({ values }) => {
         return (
           <>
-            <NewsOptions values={values} id={id} />
+            <PublicityOptions values={values} id={id} />
           </>
         )
       }}
@@ -35,4 +37,4 @@ const NewsForm = ({ id }: NewsFormProps) => {
   )
 }
 
-export default NewsForm
+export default PublicityForm

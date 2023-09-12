@@ -13,7 +13,9 @@ const initialValues = (values: Values) => {
   return {
     textHeader: values?.textHeader || 'texto del header',
     color: values?.color || '#F9BB19',
-    img: values?.img || '',
+    img: values?.img || {
+      data: 'https://adac-development.s3.us-west-2.amazonaws.com/Media/logoAdac.png'
+    },
     title: values?.title || 'titulo de la noticia',
     text: values?.text || 'loren ipsum',
     readingTime: values?.readingTime || '',

@@ -28,6 +28,7 @@ const Layout = ({ children }: Props) => {
       })
     }
   }, [templateIdEditing])
+
   return (
     <div style={{ height: 'max', width: '100%' }}>
       <Typography

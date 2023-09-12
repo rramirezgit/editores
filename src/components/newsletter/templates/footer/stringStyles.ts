@@ -8,8 +8,7 @@ const stringStyle: { [key: string]: CSSProperties } = {
     height: '298px',
     padding: '33px',
     textAlign: 'center',
-    boxSizing: 'border-box',
-    cursor: 'pointer'
+    boxSizing: 'border-box'
   },
   footer_content_title: {
     color: '#000',
@@ -51,6 +50,11 @@ const stringStyle: { [key: string]: CSSProperties } = {
     margin: '25px auto',
     width: '88.495px',
     height: '32.171px'
+  },
+  news_SocialMedia: {
+    maxWidth: '243px',
+    margin: '25px auto',
+    padding: 'auto'
   }
 }
 

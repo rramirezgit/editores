@@ -9,6 +9,7 @@ const ColorsHeader = () => {
       <Layout>
         <div className={styles.content}>
           <ColorPicker label="Titulo" name="color" />
+          <ColorPicker label="Redes Sociales" name="socialMediasColor" />
         </div>
       </Layout>
     </>
